@@ -1,0 +1,21 @@
+deployment:
+  imageRepo: hanvihanshith/catalogue
+  imageVersion: v1
+service:
+  type: ClusterIP
+configmap: 
+  mongoURL: "mongodb://mongodb:27017/catalogue"
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    

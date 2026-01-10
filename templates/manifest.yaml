@@ -1,0 +1,76 @@
+## ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: catalogue
+  namespace: safety
+data: 
+  MONGO: "true"
+  MONGO_URL: {{ .Values.configmap.mongoURL }}
+---
+## Deplyments
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: catalogue
+  namespace: safety
+# these are deployment labels
+  labels:
+    project: safety
+    component: catalogue
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    # these labels are used to select pods
+    matchLabels:
+      project: safety
+      component: catalogue
+      tier: backend
+    # pod definitdion
+  template: 
+    metadata:
+      labels:
+        project: safety
+        component: catalogue
+        tier: backend
+    spec:
+      containers:
+      - name: catalogue
+        image: "{{ .Values.deployment.imageRepo }}:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: catalogue
+        ports: 
+        - name: liveness-port
+          containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health 
+            port: 8080  
+          failureThreshold: 1
+          periodSeconds: 20
+        livenessProbe:
+          httpGet:
+            path: /health 
+            port: 8080  
+          failureThreshold: 1
+          periodSeconds: 20
+---
+### Service creation
+apiVersion: v1 
+kind: Service
+metadata: 
+  name: catalogue
+  namespace: safety
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    project: safety
+    component: catalogue
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port}} ## services port
+      targetPort: 8080 ## container port

@@ -2,7 +2,10 @@ deployment:
   imageRepo: hanvihanshith/catalogue996058207546.dkr.ecr.us-east-1.amazonaws.com/safety/catalogue
   imageVersion: IMAGE_VERSION
 service:
-  servicePort: 8080 # default value
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
     
 
 

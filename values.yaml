@@ -1,6 +1,6 @@
 deployment:
   imageRepo: 996058207546.dkr.ecr.us-east-1.amazonaws.com/safety/catalogue
-  imageVersion: IMAGE_VERSION
+  imageVersion: 1.0.1
 service:
   type: ClusterIP
   port: 8080

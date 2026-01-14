@@ -16,14 +16,13 @@ spec:
       - env: prod
         namespace: argocd
         server: https://kubernetes.default.svc
-
   template:
     metadata:
       name: catalogue-{{env}}
     spec:
       project: default
       source:
-        repoURL: https://github.com/NagineniHari/EKS-argoCD.git
+        repoURL: https://github.com/daws-86s/eks-argocd.git
         targetRevision: main
         path: .
         helm:
@@ -31,7 +30,7 @@ spec:
           valueFiles:
             - values-{{env}}.yaml
       destination:
-        server: {{server}}
+        server: {{ server }}
         namespace: {{namespace}}
       syncPolicy:
         automated:

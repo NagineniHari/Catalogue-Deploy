@@ -6,7 +6,7 @@ metadata:
 spec:
     project: default
     source:
-      repoURL: https://github.com/NagineniHari/EKS-argoCD.git
+      repoURL: https://github.com/NagineniHari/Catalogue-Deploy.git
       targetRevision: main
       path: .
       helm:

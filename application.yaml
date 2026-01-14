@@ -22,7 +22,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/daws-86s/eks-argocd.git
+        repoURL: https://github.com/NagineniHari/EKS-argoCD.git
         targetRevision: main
         path: .
         helm:

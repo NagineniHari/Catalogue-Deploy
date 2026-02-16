@@ -4,18 +4,4 @@ deployment:
 service:
   type: ClusterIP
 configmap: 
-  mongoURL: "mongodb://mongodb:27017/catalogue"
-    
-
-
-
-
-
-
-
-
-
-
-
-
-    
+  mongoURL: "mongodb://mongodb:27017/catalogue"    
